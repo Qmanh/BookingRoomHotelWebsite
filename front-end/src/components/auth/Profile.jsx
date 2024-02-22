@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { deleteUser, getBookingsByUserId, getUser } from "../utils/ApiFunctions"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import moment from "moment"
 
 const Profile = () => {
@@ -193,6 +193,14 @@ const Profile = () => {
 									<button className="btn btn-danger btn-sm" onClick={handleDeleteAccount}>
 										Close account
 									</button>
+								</div>
+
+								<div className="mx-2">
+									<Link to="/change-password">
+										<button className="btn btn-warning btn-sm">
+											Change Password
+										</button>
+									</Link>
 								</div>
 							</div>
 						</div>

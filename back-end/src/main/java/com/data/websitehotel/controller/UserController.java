@@ -1,15 +1,19 @@
 package com.data.websitehotel.controller;
 
+import com.data.websitehotel.exception.IllegalStateException;
 import com.data.websitehotel.model.User;
+import com.data.websitehotel.request.ChangePasswordRequests;
 import com.data.websitehotel.service.IUserService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -19,6 +23,18 @@ import java.util.List;
 public class UserController {
     @Autowired
     private IUserService userService;
+
+    @PostMapping("/change-password")
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequests request){
+        try {
+            userService.changePassword(request);
+            return ResponseEntity.ok("Change Password Successfully!");
+        }catch(IllegalStateException e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
+
+    }
+
 
     @GetMapping("/all")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -53,7 +69,5 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting user");
         }
     }
-
-
 
 }

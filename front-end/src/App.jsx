@@ -21,6 +21,8 @@ import Profile from './components/auth/Profile'
 import { AuthProvider } from './components/auth/AuthProvider'
 import RequireAuth from './components/auth/RequireAuth'
 import Logout from './components/auth/Logout'
+import ChangePassword from './components/auth/ChangePassword'
+import ForgotPassword from './components/auth/ForgotPassword'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -54,6 +56,8 @@ function App() {
 
           <Route path="/profile"  element={<Profile/>} />
           <Route path="/logout"  element={<Logout/>} />
+          <Route path="/change-password"  element={<ChangePassword/>} />
+          <Route path="/forgotPassword"  element={<ForgotPassword/>} />
         </Routes>
       </Router>
       <Footer/>

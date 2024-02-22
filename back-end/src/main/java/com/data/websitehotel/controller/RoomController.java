@@ -40,7 +40,6 @@ public class RoomController {
     private IBookingRoomService bookedRoomService;
 
     @PostMapping("/add/new-room")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<RoomResponse> addNewRoom(
             @RequestParam("photo") MultipartFile photo,
             @RequestParam("roomType") String roomType,
@@ -75,13 +74,11 @@ public class RoomController {
 
 
     @DeleteMapping("/delete/room/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteRoom(@PathVariable("id") Long id){
         roomService.deleteRoom(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @PutMapping("/update/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<RoomResponse> updateRoom(@PathVariable("id") Long id,
                                                   @RequestParam(required = false) String roomType,
                                                    @RequestParam(required = false) BigDecimal roomPrice,

@@ -41,6 +41,9 @@ public class BookedRoom {
     @Column(name = "confirmation_Code")
     private String bookingConfirmationCode;
 
+    @Column(name = "total_price")
+    private Long totalPrices;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
     private Room room;

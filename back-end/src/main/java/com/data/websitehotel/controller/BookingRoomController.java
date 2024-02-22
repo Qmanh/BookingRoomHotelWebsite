@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class BookingRoomController {
     private IRoomService roomService;
 
     @GetMapping("/all-bookings")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<BookingResponse>> getAllBooking(){
         List<BookedRoom> bookings = bookingService.getAllBookings();
         List<BookingResponse> bookingResponses = new ArrayList<>();
@@ -65,6 +67,7 @@ public class BookingRoomController {
 
 
     @DeleteMapping("/booking/{id}/delete")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void cancelBooking(@PathVariable("id") Long id){
         bookingService.cancelBooking(id);
     }

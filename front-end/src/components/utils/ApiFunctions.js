@@ -12,18 +12,18 @@ export const getHeader = () =>{
     }
 }
 
-export async function addRoom(photo, roomType,roomPrice){
-    const formData = new FormData()
-    formData.append("photo",photo);
-    formData.append("roomType",roomType);
-    formData.append("roomPrice",roomPrice);
-
-    const response = await api.post("/rooms/add/new-room", formData)
-    if(response.status === 201){
-        return true;
-    }else{
-        return false;
-    }
+export async function addRoom(photo, roomType, roomPrice) {
+	const formData = new FormData()
+	formData.append("photo", photo)
+	formData.append("roomType", roomType)
+	formData.append("roomPrice", roomPrice)
+    console.log(getHeader())
+	const response = await api.post(`/rooms/add/new-room`,formData)
+	if (response.status === 201) {
+		return true
+	} else {
+		return false
+	}
 }
 
 export async function getRoomTypes() {
@@ -74,7 +74,7 @@ export async function getRoomById(id){
 
 export async function bookRoom(id,booking){
     try{
-        const response = await api.post(`/bookings/room/${id}/booking`,booking)
+        const response = await api.post(`/bookings/room/${id}/booking`,booking,{headers: getHeader()})
         return response.data
     }catch(error){
         if(error.response && error.response.data){
@@ -87,7 +87,7 @@ export async function bookRoom(id,booking){
 
 export async function getAllBookings(){
     try{
-        const result = await api.get("/bookings/all-bookings")
+        const result = await api.get("/bookings/all-bookings", {headers: getHeader()})
         return result.data
     }catch(error){
         throw new Error(`Error fetching bookings: ${error.message}`)
@@ -96,7 +96,7 @@ export async function getAllBookings(){
 
 export async function getBookingByConfirmationCode(confirmationCode){
     try{
-        const result = await api.get(`/bookings/confirmation/${confirmationCode}`)
+        const result = await api.get(`/bookings/confirmation/${confirmationCode}`,{headers: getHeader()})
         return result.data
     }catch(error){
         if(error.response && error.response.data){
@@ -109,7 +109,7 @@ export async function getBookingByConfirmationCode(confirmationCode){
 
 export async function cancelBooking(id){
     try{
-        const result = await api.delete(`/bookings/booking/${id}/delete`)
+        const result = await api.delete(`/bookings/booking/${id}/delete`,{headers: getHeader()})
         return result.data
 
     }catch(error){
@@ -196,4 +196,30 @@ export async function getBookingsByUserId(userId, token) {
 		console.error("Error fetching bookings:", error.message)
 		throw new Error("Failed to fetch bookings")
 	}
+}
+
+export async function ChangePasswordUser(enterPassword){
+    
+    try{
+        const response = await api.post(`/user/change-password`,enterPassword,{
+            headers: getHeader()
+        })
+        return response.data
+    }catch(error){
+        if(error.response && error.response.data){
+            throw new Error(error.response.data)
+        }else{
+            throw new Error(`Change passsword error : ${error.message}`)
+        }
+    }
+}
+
+export async function ForgotPasswordUser(email){
+    
+    try{
+        const response = await api.put(`/auth/forgot-password?email=${email}`)
+        return response.data
+    }catch(error){
+        throw error
+    }
 }

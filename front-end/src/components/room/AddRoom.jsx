@@ -67,7 +67,7 @@ const AddRoom = () => {
 						{errorMessage && <div className="alert alert-danger fade show"> {errorMessage}</div>}
 
 						<form onSubmit={handleSubmit}>
-							<div className="mb-3 text-start">
+							<div className="mb-3">
 								<label htmlFor="roomType" className="form-label">
 									Room Type
 								</label>
@@ -78,7 +78,7 @@ const AddRoom = () => {
 									/>
 								</div>
 							</div>
-							<div className="mb-3 text-start">
+							<div className="mb-3">
 								<label htmlFor="roomPrice" className="form-label">
 									Room Price
 								</label>
@@ -93,7 +93,7 @@ const AddRoom = () => {
 								/>
 							</div>
 
-							<div className="mb-3 text-start">
+							<div className="mb-3">
 								<label htmlFor="photo" className="form-label">
 									Room Photo
 								</label>
@@ -115,7 +115,7 @@ const AddRoom = () => {
 							</div>
 							<div className="d-grid gap-2 d-md-flex mt-2">
 								<Link to={"/existing-rooms"} className="btn btn-outline-info">
-									Back
+									Existing rooms
 								</Link>
 								<button type="submit" className="btn btn-outline-primary ml-5">
 									Save Room

@@ -120,13 +120,13 @@ return (
 				<p>Children: {bookingInfo.numOfChildren}</p>
 				<p>Total Guest: {bookingInfo.totalNumOfGuest}</p>
 
-                {!isDeleted && (
+                {/* {!isDeleted && (
                     <button
                     className="btn btn-danger"
                     onClick={() => handleBookingCancellation(bookingInfo.id)}
                     >
                     Cancel Booking:</button>
-                )}
+                )} */}
                 </div>
                 ):(
                     <div>

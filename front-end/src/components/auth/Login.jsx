@@ -77,9 +77,13 @@ const Login = () =>{
 						Login
 					</button>
 					<span style={{ marginLeft: "10px" }}>
-						Don't' have an account yet?<Link to={"/register"}> Register</Link>
+						<Link to={"/forgotPassword"}>Forgot Password? </Link>
 					</span>
 				</div>
+					<span style={{ marginLeft: "10px" }}>
+						Don't' have an account yet?<Link to={"/register"}> Register</Link>
+					</span>
+				
 			</form>
 		</section>
 	)
